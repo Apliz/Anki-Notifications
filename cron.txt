@@ -1,1 +1,30 @@
 
+Traceback (most recent call last):
+  File "/Users/antonplisnier/Desktop/Labour/.utilityThirdPartyCodebases/ankiConnect/main.py", line 4, in <module>
+    generate_post_data()
+  File "/Users/antonplisnier/Desktop/Labour/.utilityThirdPartyCodebases/ankiConnect/utils.py", line 55, in generate_post_data
+    post_to_phone(
+  File "/Users/antonplisnier/Desktop/Labour/.utilityThirdPartyCodebases/ankiConnect/utils.py", line 28, in post_to_phone
+    conn.request("POST", REQUESTPATH,
+  File "/usr/local/Cellar/python@3.12/3.12.1_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py", line 1327, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python@3.12/3.12.1_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py", line 1373, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.12/3.12.1_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py", line 1322, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.12/3.12.1_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py", line 1081, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python@3.12/3.12.1_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py", line 1025, in send
+    self.connect()
+  File "/usr/local/Cellar/python@3.12/3.12.1_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py", line 1461, in connect
+    super().connect()
+  File "/usr/local/Cellar/python@3.12/3.12.1_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/http/client.py", line 991, in connect
+    self.sock = self._create_connection(
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/python@3.12/3.12.1_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/socket.py", line 828, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/python@3.12/3.12.1_1/Frameworks/Python.framework/Versions/3.12/lib/python3.12/socket.py", line 963, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known

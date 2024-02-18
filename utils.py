@@ -1,4 +1,4 @@
-"""Modules providing access to Anki user data, environment variables, http"""
+""""""
 import urllib
 import http.client
 from anki.collection import Collection
@@ -22,8 +22,8 @@ def get_decks_dict():
     return my_decks
 
 
-def post_to_phone(message):
-    """Establish connection to Pushover API and POST notification message string"""
+def pushover_post(message):
+    """POST notifaction message string to Pushover"""
     conn = http.client.HTTPSConnection(URL)
     conn.request("POST", REQUESTPATH,
       urllib.parse.urlencode({
@@ -41,8 +41,8 @@ def post_to_phone(message):
 #     c. 'name1, name2 and name3
 #     d. 'name1, name2 and X other decks
 
-def generate_post_data():
-    """Constructs POST data and calls post_to_phone()"""
+def create_message():
+    """GET and validate message data from 'collection.anki2' """
     my_decks = get_decks_dict()
     deck_names = ""
     review_total = 0
@@ -51,8 +51,6 @@ def generate_post_data():
         if count:
             review_total += count
             deck_names += f'{name},'
-    if review_total:
-        post_to_phone(
-            f'You have {review_total} cards ready to be learned in {deck_names}today!'
-        )
-    return 1
+    if review_total > 0:
+        message_string=f'You have {review_total} cards ready to be learned in {deck_names}today!'
+        return message_string
