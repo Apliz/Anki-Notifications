@@ -18,12 +18,10 @@ def get_collection():
     """Establish connection to collection.anki2 file"""
     return Collection(COLLECTIONPATH)
 
-def grammar():
-    """Formats the message string grammar depending on amount of learnable decks"""
-    # Still to implement:
-    #     1. deck name grammar switch function to allow for different list length:
-    #       a. 'name1'
-    #       b. 'name 1 and name2
-    #       c. 'name1, name2 and name3
-    #       d. 'name1, name2 and X other decks
-    return None
+def first_two_names(deck_names) -> str:
+    """Returns correct grammar for the first two deck names"""
+    n = len(deck_names)
+    if n < 3:
+        return f'{deck_names[0]} and {deck_names[1]}'
+    elif n > 2:
+        return f'{deck_names[0]}, {deck_names[1]}, and '

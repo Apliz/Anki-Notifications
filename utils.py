@@ -2,15 +2,16 @@
 import urllib
 import http.client
 from dotenv import dotenv_values
-from helpers import get_collection
+from helpers import get_collection, first_two_names
 import constants
 
 config = dotenv_values(".env")
 col = get_collection()
 
 # Why on earth do I need to pop off the last dictionary item for it to work?
-# The only clue that I have is that it adds filtered lists, need to find a
-# general solution to fix this.
+
+# The only clue that I have is that anki will append a filtered list item 
+# to the end of the all_names_ids(), need to find a general solution to fix this.
 def get_decks_dict() -> dict:
     """Returns python dictionary of Anki decks"""
     my_decks = {}
@@ -20,10 +21,10 @@ def get_decks_dict() -> dict:
     return my_decks
 
 def pushover_post(message):
-    """POST notifaction message string to Pushover"""    
+    """POST notifaction message string to Pushover"""
     conn = http.client.HTTPSConnection(constants.URL)
     conn.request("POST", constants.REQUESTPATH,
-      urllib.parse.urlencode({
+        urllib.parse.urlencode({
         "token": config["PUSHOVER_TOKEN"],
         "user": config["PUSHOVER_USERKEY"],
         "message": message,
@@ -31,16 +32,32 @@ def pushover_post(message):
     conn.getresponse()
     return 1
 
-def create_message():
+def get_learnable_cards():
     """GET and validate message data from 'collection.anki2' """
     my_decks = get_decks_dict()
-    deck_names = ""
-    review_total = 0
+    deck_names = []
+    learnable_card_count = 0
     for name, _id in my_decks.items():
         count = col.sched.deck_due_tree(_id).review_count
         if count:
-            review_total += count
-            deck_names += f'{name},'
-    if review_total > 0:
-        message_string=f'You have {review_total} cards ready to be learned in {deck_names}today!'
-        return message_string
+            learnable_card_count += count
+            deck_names.append(f'{name}')
+    if learnable_card_count > 0:
+        return deck_names, learnable_card_count
+
+# I want to make the notification more clear.
+# Some research would be good here.
+def grammar(deck_names,learnable_card_count):
+    """Formats the message string grammar depending on amount of learnable decks"""
+    deck_count = len(deck_names)
+    string_base = f'You have {learnable_card_count} cards ready for review in '
+    match deck_count:
+        case 1:
+            return f'{string_base} {deck_names[0]}'
+        case 2:
+            return f'{string_base}{first_two_names(deck_names)}'
+        case 3:
+            return f'{string_base}{first_two_names(deck_names)}{deck_names[2]}'
+        case _:
+            return f'{string_base}{first_two_names(deck_names)}{deck_count - 2} more'
+    return None
