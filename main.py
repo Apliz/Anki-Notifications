@@ -1,15 +1,15 @@
 """Import utility function from utils.py"""
+import sys
 from utils import create_message, pushover_post
+from helpers import has_internet_connection
 
 def main():
     """Top level function"""
-    # If internet connection = TRUE
-    #   generate post data with generate_post()
-    #   Pass data to pushover_post and execute
-    message = create_message()
-    pushover_post(message)
+    if has_internet_connection():
+        message = create_message()
+        pushover_post(message)
+        return 0
+
 
 if __name__ == "__main__":
-    main()
-
-# generate_post_data()
+    sys.exit(main())
