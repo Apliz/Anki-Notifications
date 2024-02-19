@@ -3,10 +3,7 @@
 1. Create a README
 2. Decide how to deal with a failed internet connection.
     1. Work queues? Something like Rabbit MQ or Celery
-        1. check if they provide the broker service alongside. REDIS definitely does.
-            - [RabbitMQ Work Queues](https://rabbitmq.com/tutorials/tutorial-two-python.html)
-            - [Celery](https://docs.celeryq.dev/en/stable/index.html)
-            - [Redis Vector Database](https://redis.io/docs/get-started/vector-database/)
+        a. Huey with RQ
     2. SQL database with ```time.sleep()``` in the script, cap with maximum timeout?
         1. Definitely not a top sensation. But still consider for ease.
 3. Sort out ```get_deck_dict()``` for the love of God
