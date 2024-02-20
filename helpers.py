@@ -1,5 +1,6 @@
 """Helper Functions"""
-import requests
+from builtins import ConnectionError
+from requests import get, Timeout
 from anki.collection import Collection
 from constants import COLLECTIONPATH
 
@@ -8,9 +9,9 @@ def has_internet_connection() -> bool | ConnectionError:
     ip_addresses = ["1.1.1.1", "8.8.8.8", "10.0.0.1"] 
     for ip in ip_addresses:
         try:
-            requests.get(f'http://{ip}', timeout=1)     
+            get(f'http://{ip}', timeout=1)     
             return True
-        except (requests.ConnectionError, requests.Timeout):
+        except (ConnectionError,Timeout):
             continue
     raise ConnectionError("No connection to the internet was detected")
 

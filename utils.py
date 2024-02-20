@@ -1,9 +1,9 @@
 """Utility files"""
-import urllib
-import http.client
+from urllib import parse
+from http.client import HTTPSConnection
 from dotenv import dotenv_values
 from helpers import get_collection, first_two_names
-import constants
+import constants as const
 
 config = dotenv_values(".env")
 col = get_collection()
@@ -22,9 +22,9 @@ def get_decks_dict() -> dict:
 
 def pushover_post(message):
     """POST notifaction message string to Pushover"""
-    conn = http.client.HTTPSConnection(constants.URL)
-    conn.request("POST", constants.REQUESTPATH,
-        urllib.parse.urlencode({
+    conn = HTTPSConnection(const.URL)
+    conn.request("POST", const.REQUESTPATH,
+        parse.urlencode({
         "token": config["PUSHOVER_TOKEN"],
         "user": config["PUSHOVER_USERKEY"],
         "message": message,
