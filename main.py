@@ -1,16 +1,19 @@
 """Import utility function from utils.py"""
-# from sys import
+from asyncio import to_thread, run
 from builtins import exit
 from utils import get_learnable_cards, pushover_post, grammar
-from helpers import has_internet_connection
+from helpers import network_listener
 
-def main():
+async def main():
     """Top level function"""
-    if has_internet_connection():
-        deck_names, card_count = get_learnable_cards()
-        message = grammar(deck_names, card_count)
-        pushover_post(message)
-        return 0
+    # Async Architecture
+    # ######################
+
+    network = to_thread(network_listener)
+    deck_names, card_count = get_learnable_cards()
+    message = grammar(deck_names, card_count)
+    await network
+    pushover_post(message)
 
 if __name__ == "__main__":
-    exit(main())
+    run(main())

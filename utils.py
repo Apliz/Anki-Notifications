@@ -47,12 +47,13 @@ def get_learnable_cards():
 
 # I want to make the notification more clear.
 # Some research would be good here.
-def grammar(deck_names,learnable_card_count):
+def grammar(deck_names,learnable_card_count) -> str:
     """Formats the message string grammar depending on amount of learnable decks"""
     deck_count = len(deck_names)
     string_base = f'You have {learnable_card_count} cards ready for review in '
     match deck_count:
         case 1:
+            
             return f'{string_base} {deck_names[0]}'
         case 2:
             return f'{string_base}{first_two_names(deck_names)}'
