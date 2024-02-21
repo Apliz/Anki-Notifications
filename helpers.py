@@ -4,7 +4,6 @@ from requests import head, Timeout, ConnectionError
 from anki.collection import Collection
 from constants import COLLECTIONPATH
 
-
 def network_listener() -> None:
     """Listens for an active network"""
     ip_addresses, result = ["1.1.1.1", "8.8.8.8", "10.0.0.1"], None
