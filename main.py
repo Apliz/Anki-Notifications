@@ -1,16 +1,15 @@
 """Import utility function from utils.py"""
-# from sys import
 from builtins import exit
 from utils import get_learnable_cards, pushover_post, grammar
-from helpers import has_internet_connection
+from thread_manager import network
 
 def main():
     """Top level function"""
-    if has_internet_connection():
-        deck_names, card_count = get_learnable_cards()
-        message = grammar(deck_names, card_count)
-        pushover_post(message)
-        return 0
+    network.start()
+    deck_names, card_count = get_learnable_cards()
+    message = grammar(deck_names, card_count)
+    network.join()
+    pushover_post(message)
 
 if __name__ == "__main__":
     exit(main())

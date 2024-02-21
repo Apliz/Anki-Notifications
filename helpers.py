@@ -1,19 +1,21 @@
 """Helper Functions"""
-from builtins import ConnectionError
-from requests import get, Timeout
+from time import sleep
+from requests import head, Timeout, ConnectionError
 from anki.collection import Collection
 from constants import COLLECTIONPATH
 
-def has_internet_connection() -> bool | ConnectionError:
-    """Check for active internet connection"""
-    ip_addresses = ["1.1.1.1", "8.8.8.8", "10.0.0.1"] 
-    for ip in ip_addresses:
-        try:
-            get(f'http://{ip}', timeout=1)     
-            return True
-        except (ConnectionError,Timeout):
-            continue
-    raise ConnectionError("No connection to the internet was detected")
+
+def network_listener() -> None:
+    """Listens for an active network"""
+    ip_addresses, result = ["1.1.1.1", "8.8.8.8", "10.0.0.1"], None
+    while result is None:
+        for ip in ip_addresses:
+            try:
+                result = head(f'http://{ip}', timeout=2)
+                if result is not None:
+                    return
+            except (ConnectionError, Timeout):
+                sleep(2)
 
 def get_collection():
     """Establish connection to collection.anki2 file"""

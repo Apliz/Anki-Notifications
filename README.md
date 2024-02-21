@@ -26,6 +26,19 @@
 | "     | "          | 0.726  | 0.641       | 0.085            | 14,070         |
 | "     | "          | 0.858  | 0.779       | 0.079            | 11,906         |
 
+###### Pure Python with multi-threading
+
+| Calls | Primitives | time/s | getresponse | time-getresponse | Calls/s (5S.f) |
+|-------|------------|--------|-------------|------------------|----------------|
+| 8209  | 8037       | 0.748  | 0.663       | 0.085            | 10,975         |
+| "     | "          | 0.434  | 0.328       | 0.106            | 18,915         |
+| "     | "          | 0.785  | 0.709       | 0.076            | 10,457         |
+| "     | "          | 0.674  | 0.499       | 0.175            | 12,001         |
+| "     | "          | 0.553  | 0.465       | 0.088            | 14,844         |
+| "     | "          | 0.610  | 0.484       | 0.126            | 13,457         |
+
+###### Pure Python with async
+
 ### Happiest astronaut:  for dopamine purposes
 
 ![Happiest Astronaut](/happy%20astronaut.jpg)
