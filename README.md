@@ -37,8 +37,6 @@
 | "     | "          | 0.747  | 0.682       | 0.065            |                |
 | "     | "          | 0.814  | 0.729       | 0.085            |                |
 
-###### Pure Python with simple queue implementation
-
 ### Happiest astronaut:  for dopamine purposes
 
 ![Happiest Astronaut](/happy%20astronaut.jpg)
