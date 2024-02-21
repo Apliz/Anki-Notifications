@@ -26,6 +26,19 @@
 | "     | "          | 0.726  | 0.641       | 0.085            | 14,070         |
 | "     | "          | 0.858  | 0.779       | 0.079            | 11,906         |
 
+###### Pure Python with Asyncio
+
+| Calls | Primitives | time/s | getresponse | time-getresponse | Calls/s (5S.f) |
+|-------|------------|--------|-------------|------------------|----------------|
+| 9261  | 9101       | 0.812  | 0.731       | 0.081            |                |
+| "     | "          | 0.715  | 0.655       | 0.060            |                |
+| "     | "          | 0.741  | 0.681       | 0.060            |                |
+| "     | "          | 0.749  | 0.685       | 0.064            |                |
+| "     | "          | 0.747  | 0.682       | 0.065            |                |
+| "     | "          | 0.814  | 0.729       | 0.085            |                |
+
+###### Pure Python with simple queue implementation
+
 ### Happiest astronaut:  for dopamine purposes
 
 ![Happiest Astronaut](/happy%20astronaut.jpg)
