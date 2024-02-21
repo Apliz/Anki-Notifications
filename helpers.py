@@ -2,7 +2,7 @@
 from time import sleep
 from requests import Timeout, head, ConnectionError
 from anki.collection import Collection
-from constants import COLLECTIONPATH
+from static.constants import COLLECTIONPATH
 
 def network_listener() -> None:
     """Listens for an active network"""

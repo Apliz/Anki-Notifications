@@ -3,7 +3,7 @@ from urllib import parse
 from http.client import HTTPSConnection
 from dotenv import dotenv_values
 from helpers import get_collection, first_two_names
-import constants as const
+from static.constants import URL,REQUESTPATH
 
 config = dotenv_values(".env")
 col = get_collection()
@@ -22,8 +22,8 @@ def get_decks_dict() -> dict:
 
 def pushover_post(message):
     """POST notifaction message string to Pushover"""
-    conn = HTTPSConnection(const.URL)
-    conn.request("POST", const.REQUESTPATH,
+    conn = HTTPSConnection(URL)
+    conn.request("POST", REQUESTPATH,
         parse.urlencode({
         "token": config["PUSHOVER_TOKEN"],
         "user": config["PUSHOVER_USERKEY"],
