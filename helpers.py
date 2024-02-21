@@ -16,7 +16,6 @@ def network_listener() -> None:
             except (ConnectionError, Timeout):
                 sleep(2)
 
-
 def get_collection():
     """Establish connection to collection.anki2 file"""
     return Collection(COLLECTIONPATH)
