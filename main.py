@@ -6,9 +6,6 @@ from helpers import network_listener
 
 async def main():
     """Top level function"""
-    # Async Architecture
-    # ######################
-
     network = to_thread(network_listener)
     deck_names, card_count = get_learnable_cards()
     message = grammar(deck_names, card_count)
@@ -16,4 +13,4 @@ async def main():
     pushover_post(message)
 
 if __name__ == "__main__":
-    run(main())
+    exit(run(main()))
