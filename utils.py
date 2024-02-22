@@ -8,10 +8,6 @@ from static.constants import URL,REQUESTPATH
 config = dotenv_values(".env")
 col = get_collection()
 
-# Why on earth do I need to pop off the last dictionary item for it to work?
-
-# The only clue that I have is that anki will append a filtered list item 
-# to the end of the all_names_ids(), need to find a general solution to fix this.
 def get_decks_dict() -> dict:
     """Returns python dictionary of Anki decks"""
     my_decks = {}
@@ -45,8 +41,6 @@ def get_learnable_cards():
     if learnable_card_count > 0:
         return deck_names, learnable_card_count
 
-# I want to make the notification more clear.
-# Some research would be good here.
 def grammar(deck_names,learnable_card_count):
     """Formats the message string grammar depending on amount of learnable decks"""
     deck_count = len(deck_names)
