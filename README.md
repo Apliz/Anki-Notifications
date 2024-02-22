@@ -2,11 +2,11 @@
 
 1. Create a README
     1. Installation and user manual
-2. In referece to get_decks_dict()
+2. In referece to ```get_decks_dict()```
     1. Maybe there's a different function instead of ```all_names_and_ids()``` ? Using ```popitem()``` seems very wrong.
     2. Transfer method to helpers.py
-3. Consider refactor of deck_names = [] within get_learnable_cards()
-4. Consider if main(), pushover_post(), or grammar() **needs** their return statement
+3. Consider refactor of ```deck_names = []``` within ```get_learnable_cards()```
+4. Consider if ```main()```, ```pushover_post()```, or ```grammar()``` **needs** their return statement
 5. Can I legally use 'happy astronaut.jpg'
     1. Rename with underscore
 6. Check Licences of all dependences and list for guidance to deciding the licence of this repository.
@@ -23,7 +23,7 @@
     1. Portability
     2. Test suite
     3. Distributions
-13. Create topology.md with methods grouped by page and connection.
+13. Create ```topology.md``` with methods grouped by page and connection.
 14. An easily changable variable to set the maximum times a notification can be sent.
 15. Explore the idea of a dynamic crontab entry.
 16. Benchmarking
@@ -34,7 +34,7 @@
         3. Better Implementation names. Consider single word. Consider term 'pure Python' (what does that even mean?)
 17. Network listener
     1. Allow users to check network against their own URLS
-1. Abstract URLS into a constant. Allow easy UPDATE of URL strings
+1. Abstract ```URLS``` into ```constants.py```. Allow easy UPDATE of ```URL``` strings
 
 #### Benchmarking can be found here
 
