@@ -1,12 +1,20 @@
 # Benchmarking
 
-## About
-Add about section here. List tools. Refer to branches etc. Make nice
+Ran using the [Cprofile](https://docs.python.org/3/library/profile.html#module-cProfile) interface for ```lsprof```
 
-### Control
+Network speed was approximately 102Mbps with [speedtest.net](https://speedtest.net)
 
-###### Control. Python with no queue
-###### Only simple POST. Fails with no internet connection.
+|Test device                    |
+|-------------------------------|
+|16 GB 1600 MHz DDR3            |
+|2.5 GHz Quad-Core Intel Core i7|
+|Mid 2015                       |
+
+### Control 
+---
+POST only - no network listener </br>
+``` Average: 0.619s``` </br>
+```Average time to complete (TTC): 0.619s```
 
 | Calls | Primitives | time / s | getresponse / s | time-getresponse / s | Calls / s (5sf) |
 |-------|------------|--------|-------------|------------------|----------------|
@@ -17,9 +25,14 @@ Add about section here. List tools. Refer to branches etc. Make nice
 | "     | "          | 0.726  | 0.641       | 0.085            | 14,070         |
 | "     | "          | 0.858  | 0.779       | 0.079            | 11,906         |
 
-##### Average: 0.619s
 
-###### Pure Python with Asyncio
+## Implementations
+
+
+### Asyncio
+Git branch: 'async' </br>
+```Average : 0.069s``` </br>
+```Average TTC : 0.763s```
 
 | Calls | Primitives | time/s | getresponse | time-getresponse | Calls/s (5S.f) |
 |-------|------------|--------|-------------|------------------|----------------|
@@ -30,9 +43,11 @@ Add about section here. List tools. Refer to branches etc. Make nice
 | "     | "          | 0.747  | 0.682       | 0.065            |                |
 | "     | "          | 0.814  | 0.729       | 0.085            |                |
 
-##### Average : 0.069s
 
-###### Pure Python with multi-threading
+## Multi-threading
+Git branch: "threading" </br>
+```Average : 0.109s``` </br>
+```Average TTC : 0.634s```
 
 | Calls | Primitives | time/s | getresponse | time-getresponse | Calls/s (5S.f) |
 |-------|------------|--------|-------------|------------------|----------------|
@@ -43,9 +58,10 @@ Add about section here. List tools. Refer to branches etc. Make nice
 | "     | "          | 0.553  | 0.465       | 0.088            | 14,844         |
 | "     | "          | 0.610  | 0.484       | 0.126            | 13,457         |
 
-##### Average : 0.109
-
-###### Python simple queue
+## Simple Queue
+Git branch: "master" </br>
+```Average: 0.069s``` </br>
+```Average TTC: 0.625s```
 
 | Calls | Primitives | time/s | getresponse | time-getresponse | Calls/s (5S.f) |
 |-------|------------|--------|-------------|------------------|----------------|
@@ -55,5 +71,3 @@ Add about section here. List tools. Refer to branches etc. Make nice
 | "     | "          | 0.841  | 0.781       | 0.060            |                |
 | "     | "          | 0.293  | 0.226       | 0.067            |                |
 | "     | "          | 0.831  | 0.757       | 0.074            |                |
-
-##### Average : 0.069

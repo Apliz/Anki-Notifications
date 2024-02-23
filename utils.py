@@ -1,36 +1,35 @@
-"""Utility files"""
+""" Utility Methods \n
+    Provides direct access to notification string builder and POST methods
+"""
 from urllib import parse
 from http.client import HTTPSConnection
 from dotenv import dotenv_values
 from helpers import first_two_names, get_decks_dict
-from static.constants import URL,REQUESTPATH, COLLECTIONPATH
+from static.constants import URL,REQUESTPATH
+from config import THRESHOLD, COLLECTION
 
-config = dotenv_values(".env")
-col = COLLECTIONPATH
+envar = dotenv_values(".env")
+col = COLLECTION
 
-# def get_decks_dict() -> dict:
-#     """Returns python dictionary of Anki decks"""
-#     my_decks = {}
-#     for deck in col.decks.all_names_and_ids():
-#         my_decks[deck.name] = deck.id
-#     my_decks.popitem()
-#     return my_decks
-
-def pushover_post(message) -> HTTPSConnection:
-    """POST notifaction message string to Pushover"""
+def pushover_post(message:str) -> None:
+    """
+    Sends a notification string via ```HTTPSConnection``` to Pushover \n
+    Args:
+        message (str) : notification string to be send to pushover
+    """
     conn = HTTPSConnection(URL)
     conn.request("POST", REQUESTPATH,
         parse.urlencode({
-        "token": config["PUSHOVER_TOKEN"],
-        "user": config["PUSHOVER_USERKEY"],
+        "token": envar["PUSHOVER_TOKEN"],
+        "user": envar["PUSHOVER_USERKEY"],
         "message": message,
       }), { "Content-type": "application/x-www-form-urlencoded" })
     conn.getresponse()
-    # Replace the return with an error catch method
-    return 1
 
-def get_learnable_cards() -> tuple[list,int]:
-    """GET and validate message data from 'collection.anki2' """
+def get_learnable_cards() -> tuple[list[str],int]:
+    """
+    Retrieves the count of reviewable cards and deck names from the Anki Collection
+    """
     my_decks = get_decks_dict()
     deck_names = []
     to_review = 0
@@ -39,13 +38,18 @@ def get_learnable_cards() -> tuple[list,int]:
         if count:
             to_review += count
             deck_names.append(f'{name}')
-    if to_review > 0:
+    if to_review > THRESHOLD:
         return deck_names, to_review
 
-def grammar(deck_names,learnable_card_count) -> str:
-    """Formats the message string grammar depending on amount of learnable decks"""
+def grammar(deck_names:list[str],reviewable_card_count:int) -> str:
+    """
+    Formats the message string grammar depending on amount of learnable decks \n
+    Args:
+        deck_names (list[str]) : list of all deck names that have reviewable cards \n
+        reviewable_card_count (int) : total count of reviewable cards across all decks
+    """
     deck_count = len(deck_names)
-    string_base = f'You have {learnable_card_count} cards ready for review in '
+    string_base = f'You have {reviewable_card_count} cards ready for review in '
     match deck_count:
         case 1:
             return f'{string_base} {deck_names[0]}'
@@ -55,4 +59,3 @@ def grammar(deck_names,learnable_card_count) -> str:
             return f'{string_base}{first_two_names(deck_names)}{deck_names[2]}'
         case _:
             return f'{string_base}{first_two_names(deck_names)}{deck_count - 2} more'
-        # Create an error case.

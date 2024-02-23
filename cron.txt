@@ -1,0 +1,72 @@
+10.0.0.1
+where are we getting hung up?
+in the except
+8.8.8.8
+where are we getting hung up?
+in the except
+1.1.1.1
+where are we getting hung up?
+in the except
+10.0.0.1
+where are we getting hung up?
+in the except
+8.8.8.8
+where are we getting hung up?
+in the except
+1.1.1.1
+where are we getting hung up?
+in the except
+10.0.0.1
+where are we getting hung up?
+in the except
+8.8.8.8
+where are we getting hung up?
+in the except
+1.1.1.1
+where are we getting hung up?
+in the except
+10.0.0.1
+where are we getting hung up?
+in the except
+8.8.8.8
+where are we getting hung up?
+in the except
+1.1.1.1
+where are we getting hung up?
+<Response [302]>
+10.0.0.1
+where are we getting hung up?
+in the except
+8.8.8.8
+where are we getting hung up?
+in the except
+1.1.1.1
+where are we getting hung up?
+in the except
+10.0.0.1
+where are we getting hung up?
+in the except
+8.8.8.8
+where are we getting hung up?
+in the except
+1.1.1.1
+where are we getting hung up?
+in the except
+10.0.0.1
+where are we getting hung up?
+in the except
+8.8.8.8
+where are we getting hung up?
+in the except
+1.1.1.1
+where are we getting hung up?
+in the except
+10.0.0.1
+where are we getting hung up?
+in the except
+8.8.8.8
+where are we getting hung up?
+in the except
+1.1.1.1
+where are we getting hung up?
+<Response [302]>
