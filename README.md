@@ -24,4 +24,4 @@
 
 ### Happiest astronaut:  for dopamine purposes
 
-![Happiest Astronaut](/happy%20astronaut.jpg)
+![Happiest Astronaut](/static/happy_astronaut.jpg)
