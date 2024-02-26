@@ -6,7 +6,7 @@ from http.client import HTTPSConnection
 from dotenv import dotenv_values
 from helpers import first_two_names, get_decks_dict
 from static.constants import URL,REQUESTPATH
-from config import THRESHOLD, COLLECTION
+from config import REVIEWTOLL, COLLECTION
 
 envar = dotenv_values(".env")
 col = COLLECTION
@@ -38,7 +38,7 @@ def get_learnable_cards() -> tuple[list[str],int]:
         if count:
             to_review += count
             deck_names.append(f'{name}')
-    if to_review > THRESHOLD:
+    if to_review > REVIEWTOLL:
         return deck_names, to_review
 
 def grammar(deck_names:list[str],reviewable_card_count:int) -> str:

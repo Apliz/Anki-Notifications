@@ -1,36 +1,28 @@
 """ Helper Methods \n
     Container for all methods called by utils.py
 """
-from time import sleep
+from time import process_time, asctime
 from requests import Timeout, head, ConnectionError
-from config import ADDRESSES, COLLECTION
+from config import ADDRESSES, COLLECTION, NETWORKTIMEOUT
 
-# For some reason on HOME network 10.0.0.1 and 8.8.8.8 do not fucntion
-# Strangely 1.1.1.1 DOES function.
-def network_listener() -> bool:
+async def network_listener(result = None) -> bool:
     """ Loops through a list of given IP 
         addresses and returns ```True``` once an active connection is established \n
         If no active connection is detected after value ```MAXWAIT``` (time in seconds)
         the method returns ```False```
     """
-    result = None
+    timeout = maxwait()
     while result is None:
         for ip in ADDRESSES:
-            print(ip)
-            try:
-                result = head(f'http://{ip}', timeout=1)
-                if result is not None:
-                    return
-            except (ConnectionError, Timeout):
-                continue
+            if net_conn(ip, timeout):
+                return
 
 def first_two_names(deck_names:list[str]) -> str:
     """ Changes the grammar of the first two names of the notication string,
         depending on the total decks containing reviewable cards \n
         Returns a grammatically correct partial notification string \n
         Args:
-            deck_names (list[str]) : list of decks names
-
+            deck_names (list[str]) : list of decks names 
     """
     n = len(deck_names)
     if n < 3:
@@ -46,3 +38,30 @@ def get_decks_dict() -> dict[str,int]:
         my_decks[deck.name] = deck.id
     print(my_decks)
     return my_decks
+
+def maxwait() -> int:
+    """ Returns the timeout time/s for ```network_listener()```"""
+    timeout=0
+    timeout += NETWORKTIMEOUT[0] * 3600
+    timeout += NETWORKTIMEOUT[1] * 60
+    timeout += NETWORKTIMEOUT[2]
+    return timeout
+
+def write_log(timeout):
+    """
+        writes network_listener timeout to log
+    """
+    with open("log.txt",mode="a",encoding="utf-8",newline="",closefd=True) as f:
+        f.write(f'[network_listener(), at date: {asctime()}, message: timeout was exceed. timeout was set to: {timeout} seconds]\n')
+        f.close()
+
+def net_conn(ip, timeout):
+    """Attempts connection to the www"""
+    try:
+        result = head(f'http://{ip}', timeout=1).status_code
+        if result == 301:
+            return True
+    except (ConnectionError, Timeout):
+        if process_time() > timeout:
+            write_log(timeout)
+            exit()
