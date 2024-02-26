@@ -6,11 +6,7 @@ from requests import Timeout, head, ConnectionError
 from config import ADDRESSES, COLLECTION, NETWORKTIMEOUT
 
 async def network_listener(result = None) -> bool:
-    """ Loops through a list of given IP 
-        addresses and returns ```True``` once an active connection is established \n
-        If no active connection is detected after value ```MAXWAIT``` (time in seconds)
-        the method returns ```False```
-    """
+    """ Loops through a list of given IP passing them to net_conn() to attempt the connection"""
     timeout = maxwait()
     while result is None:
         for ip in ADDRESSES:
@@ -47,7 +43,7 @@ def maxwait() -> int:
     timeout += NETWORKTIMEOUT[2]
     return timeout
 
-def write_log(timeout):
+def write_log(timeout) -> None:
     """
         writes network_listener timeout to log
     """
@@ -55,8 +51,8 @@ def write_log(timeout):
         f.write(f'[network_listener(), at date: {asctime()}, message: timeout was exceed. timeout was set to: {timeout} seconds]\n')
         f.close()
 
-def net_conn(ip, timeout):
-    """Attempts connection to the www"""
+def net_conn(ip, timeout) -> bool|None:
+    """Attempts connection to the www. Exits program if none is found"""
     try:
         result = head(f'http://{ip}', timeout=1).status_code
         if result == 301:
