@@ -9,9 +9,14 @@ from config import REVIEWTOLL, COLLECTION,ADDRESSES
 
 envar = dotenv_values(".env")
 
-async def main() -> None:
+async def main(notification, network) -> None:
     """Control flow method"""
-    www = Network(ADDRESSES)
+    conn = network.establish_connection()
+    message = notification.compose()
+    await conn
+    notification.post(message)
+
+if __name__ == "__main__":
     n = Notification(
             REVIEWTOLL,
             COLLECTION,
@@ -20,9 +25,5 @@ async def main() -> None:
             envar["PUSHOVER_USERKEY"],
             REQUESTPATH
     )
-    message = n.compose()
-    await www.establish_connection()
-    n.send(message)
-
-if __name__ == "__main__":
-    exit(run(main()))
+    www = Network(ADDRESSES)
+    exit(run(main(n, www)))

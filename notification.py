@@ -19,7 +19,7 @@ class Notification():
         message = self.grammar(deck_names, card_count)
         return message
 
-    def send(self,message:str) -> None:
+    def post(self,message:str) -> None:
         """
         Sends a notification string via ```HTTPSConnection``` to Pushover \n
         Args:
