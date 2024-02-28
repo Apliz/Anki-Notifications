@@ -12,8 +12,6 @@
     1. Portability
     2. Test suite
     3. Distributions
-10. Create ```topology.md``` with methods grouped by page and connection.
-    1. Use **mermaid** and do this at the end.
 11. An easily changable variable to set the maximum times a notification can be sent.
     1. It's written inside of config.py but still needs all the implementation.
 12. Explore the idea of a dynamic crontab entry.

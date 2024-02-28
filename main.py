@@ -5,7 +5,7 @@ from dotenv import dotenv_values
 from network import Network
 from notification import Notification
 from static.constants import URL,REQUESTPATH
-from config import REVIEWTOLL, COLLECTION,ADDRESSES
+from config import REVIEWTOLL,ADDRESSES
 
 envar = dotenv_values(".env")
 
@@ -19,7 +19,6 @@ async def main(notification, network) -> None:
 if __name__ == "__main__":
     n = Notification(
             REVIEWTOLL,
-            COLLECTION,
             URL,
             envar["PUSHOVER_TOKEN"],
             envar["PUSHOVER_USERKEY"],
