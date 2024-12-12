@@ -22,6 +22,6 @@
 
 [Benchmarking](Benchmarks.md)
 
-### Happiest astronaut:  for dopamine purposes
+### The Happiest Astronaut
 
-![Happiest Astronaut](/happy%20astronaut.jpg)
+![Happiest Astronaut](https://github.com/Apliz/Anki-Notifications/blob/master/happy_astronaut.jpg)
