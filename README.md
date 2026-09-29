@@ -11,4 +11,4 @@ I'm intending to refactor, document, and release the project when I have the tim
 
 ### Happiest astronaut:  for dopamine purposes
 
-![Happiest Astronaut](/static/happy_astronaut.jpg)
+![Happiest Astronaut](/media/happy_astronaut.jpg)
